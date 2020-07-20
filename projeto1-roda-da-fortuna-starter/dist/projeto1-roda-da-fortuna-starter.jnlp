@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="projeto1-roda-da-fortuna-starter.jnlp">
+  <information>
+    <title>projeto1-roda-da-fortuna-starter</title>
+    <vendor>braulio</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="projeto1-roda-da-fortuna-starter.jar" size="10415" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="roda_da_fortuna.RodaDaFortunaStarter"  name="projeto1-roda-da-fortuna-starter" />
+  <update check="always"/>
+</jnlp>
