@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="DiagramaDaRoda">
+  <ClassDiagramComponents>
+    <Class name="Roda" package="" visibility="public" xPosition="5.0" yPosition="3.0">
+      <Fields>
+        <Field name="espacos" type="EspacoRoda[]" visibility="private"/>
+        <Field name="espacoAtual" type="EspacoRoda" visibility="private"/>
+        <Field name="EXTENSAO_IMAGEM" type="String" visibility="private"/>
+        <Field name="NUMERO_ESPACOS" type="int" visibility="private"/>
+        <Field name="CAMINHO_IMAGENS" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Roda" returnType="void" visibility="public"/>
+        <Method name="getValorAtual" returnType="int" visibility="public"/>
+        <Method name="getImagemAtual" returnType="Image" visibility="public"/>
+        <Method name="girarRoda" returnType="void" visibility="public"/>
+        <Method name="inicializaRoda" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="Jogador" package="" visibility="public" xPosition="5.0" yPosition="362.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="numeroJogada" type="int" visibility="private"/>
+        <Field name="pontos" type="int" visibility="private"/>
+        <Field name="roda" type="Roda" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Jogador" returnType="String" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="girarRoda" returnType="void" visibility="public"/>
+        <Method name="reduzirPontos" returnType="int" visibility="public">
+          <Argument type="int" name="aReduzir"/>
+        </Method>
+        <Method name="aumentaPontos" returnType="int" visibility="public">
+          <Argument type="int" name="aAumentar"/>
+        </Method>
+        <Method name="zerarPontos" returnType="void" visibility="public"/>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="String" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="getNumeroJogada" returnType="int" visibility="public"/>
+        <Method name="setNumeroJogada" returnType="int" visibility="public">
+          <Argument type="int" name="numeroJogada"/>
+        </Method>
+        <Method name="getPontos" returnType="String" visibility="public"/>
+        <Method name="setRoda" returnType="Roda" visibility="public">
+          <Argument type="Roda" name="roda"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tabuleiro" package="" visibility="public" xPosition="795.0" yPosition="3.0">
+      <Fields>
+        <Field name="puzzle" type="String" visibility="private"/>
+        <Field name="palpitePuzzle" type="char[]" visibility="private"/>
+        <Field name="palpitesRestantes" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Trabuleiro" returnType="String" visibility="public">
+          <Argument type="String" name="puzzle"/>
+        </Method>
+        <Method name="inicializarTabuleiro" returnType="void" visibility="private"/>
+        <Method name="receberPalpite" returnType="char" visibility="public">
+          <Argument type="char" name="palpite"/>
+        </Method>
+        <Method name="getPalpitePuzzle" returnType="String" visibility="public"/>
+        <Method name="getPalpitesRestantes" returnType="int" visibility="public"/>
+        <Method name="getPuzzle" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PainelJogoController" package="" visibility="public" xPosition="500.0" yPosition="-83.0">
+      <Fields>
+        <Field name="paneJogadores" type="GrindPane" visibility="private"/>
+        <Field name="comprarVogal" type="Button" visibility="private"/>
+        <Field name="imagemRoda" type="ImagemView" visibility="private"/>
+        <Field name="labelPuzzle" type="Label" visibility="private"/>
+        <Field name="paneVogais" type="GridPane" visibility="private"/>
+        <Field name="quantidadeJogadores" type="int" visibility="private"/>
+        <Field name="custoVogal" type="int" visibility="private"/>
+        <Field name="posicaoJogadorAtual" type="int" visibility="private"/>
+        <Field name="tabuleiro" type="Tabuleiro" visibility="private"/>
+        <Field name="roda" type="Roda" visibility="private"/>
+        <Field name="jogadores" type="Jogador[]" visibility="private"/>
+        <Field name="jogadorAtual" type="Jogador" visibility="private"/>
+        <Field name="selected" type="SepiaTone" visibility="private"/>
+        <Field name="girarRoda" type="Button" visibility="private"/>
+        <Field name="resolverPuzzle" type="Button" visibility="private"/>
+        <Field name="paneConsoantes" type="GridPane" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>
