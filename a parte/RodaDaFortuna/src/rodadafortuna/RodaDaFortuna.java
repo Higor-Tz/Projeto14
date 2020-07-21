@@ -5,10 +5,12 @@
  */
 package rodadafortuna;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -18,6 +20,19 @@ import javafx.stage.Stage;
 public class RodaDaFortuna extends Application {
     
     @Override
+    public void start(Stage primaryStage) {
+        try {
+            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("BaseDaRoda.fxml"));
+            Scene scene = new Scene(root, 400, 400);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+  /*  
+    @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("BaseDaRoda.fxml"));
         
@@ -26,7 +41,7 @@ public class RodaDaFortuna extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+*/
     /**
      * @param args the command line arguments
      */
