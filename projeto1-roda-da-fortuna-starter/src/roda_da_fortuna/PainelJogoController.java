@@ -128,8 +128,7 @@ public class PainelJogoController {
         String spl[] = event.getSource().toString().split("'");
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
-            this.labelPuzzle.setText(this.tabuleiro.getPalpitePuzzle());
-            habilitarNovaJogada();
+            palpiteCorreto();
         } else {
             avancarProximoJogador();
         }
@@ -147,11 +146,16 @@ public class PainelJogoController {
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
             jogadorAtual.aumentarPontos(roda.getValorAtual() * tabuleiro.getLetrasPalpite());
-            this.labelPuzzle.setText(this.tabuleiro.getPalpitePuzzle());
-            habilitarNovaJogada();
+            palpiteCorreto();
         } else {
             avancarProximoJogador();
         }
+    }
+
+    private void palpiteCorreto() {
+        this.labelPuzzle.setText(this.tabuleiro.getPalpitePuzzle());
+        habilitarNovaJogada();
+        // arrumar placar
     }
 
     /**
