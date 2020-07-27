@@ -22,7 +22,7 @@ public class RodaDaFortunaStarter extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Erro:" + e.getMessage());
         }
     }
 
