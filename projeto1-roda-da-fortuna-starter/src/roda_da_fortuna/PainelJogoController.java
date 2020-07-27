@@ -128,6 +128,7 @@ public class PainelJogoController {
         String spl[] = event.getSource().toString().split("'");
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
+            jogadorAtual.aumentarPontos(roda.getValorAtual() * tabuleiro.getLetrasPalpite());
             palpiteCorreto();
         } else {
             avancarProximoJogador();
@@ -145,7 +146,6 @@ public class PainelJogoController {
         n.disableProperty().set(true);
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
-            jogadorAtual.aumentarPontos(roda.getValorAtual() * tabuleiro.getLetrasPalpite());
             palpiteCorreto();
         } else {
             avancarProximoJogador();
@@ -204,6 +204,11 @@ public class PainelJogoController {
         this.comprarVogal.disableProperty().set((Integer.parseInt(jogadorAtual.getPontos()) < custoVogal));
         this.girarRoda.disableProperty().set(false);
         this.resolverPuzzle.disableProperty().set(false);
+        System.out.println("-----------------------------");
+        for (int i = 0; i < quantidadeJogadores; i++) {
+            System.out.println(jogadores[i].getPontos());
+            ((TitledPane) this.paneJogadores.getChildren().get(i)).setText(jogadores[i].getPontos());
+        }
     }
 
     /**
