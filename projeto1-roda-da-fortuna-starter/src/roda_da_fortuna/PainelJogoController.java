@@ -20,6 +20,15 @@ import modelo.Tabuleiro;
 public class PainelJogoController {
 
     @FXML
+    private Label ptoJog1;
+
+    @FXML
+    private Label ptoJog2;
+
+    @FXML
+    private Label ptoJog3;
+
+    @FXML
     private GridPane paneJogadores;
 
     @FXML
@@ -37,6 +46,9 @@ public class PainelJogoController {
     private final int quantidadeJogadores = 3;
     private final int custoVogal = 250;
     private int posicaoJogadorAtual = 0;
+
+    private int countVogais = 0;
+    private int countConsoantes = 0;
 
     private Tabuleiro tabuleiro;
     private Roda roda;
@@ -125,6 +137,7 @@ public class PainelJogoController {
     private void clicarConsoante(ActionEvent event, Button n) {
         this.paneConsoantes.disableProperty().set(true);
         n.disableProperty().set(true);
+        countConsoantes++;
         String spl[] = event.getSource().toString().split("'");
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
@@ -144,6 +157,7 @@ public class PainelJogoController {
         this.paneVogais.disableProperty().set(true);
         String spl[] = event.getSource().toString().split("'");
         n.disableProperty().set(true);
+        countVogais++;
         char letra = spl[1].charAt(0);
         if (tabuleiro.receberPalpite(letra)) {
             palpiteCorreto();
@@ -155,7 +169,6 @@ public class PainelJogoController {
     private void palpiteCorreto() {
         this.labelPuzzle.setText(this.tabuleiro.getPalpitePuzzle());
         habilitarNovaJogada();
-        // arrumar placar
     }
 
     /**
@@ -174,7 +187,7 @@ public class PainelJogoController {
      * @return boolean
      */
     private boolean isVogaisEsgotadas() {
-        return false; // remover
+        return (countVogais == 5);
     }
 
     /**
@@ -184,7 +197,7 @@ public class PainelJogoController {
      * @return boolean
      */
     private boolean isConsoantesEsgotadas() {
-        return false; // remover
+        return (countConsoantes == 21);
     }
 
     /**
@@ -201,14 +214,15 @@ public class PainelJogoController {
     public void habilitarNovaJogada() {
         this.paneConsoantes.disableProperty().set(true);
         this.paneVogais.disableProperty().set(true);
-        this.comprarVogal.disableProperty().set((Integer.parseInt(jogadorAtual.getPontos()) < custoVogal));
-        this.girarRoda.disableProperty().set(false);
+        
+        boolean mostraVogal = (isVogaisEsgotadas() && (Integer.parseInt(jogadorAtual.getPontos()) >= custoVogal));
+        this.comprarVogal.disableProperty().set(mostraVogal);
+        this.girarRoda.disableProperty().set(isConsoantesEsgotadas());
         this.resolverPuzzle.disableProperty().set(false);
-        System.out.println("-----------------------------");
-        for (int i = 0; i < quantidadeJogadores; i++) {
-            System.out.println(jogadores[i].getPontos());
-            ((TitledPane) this.paneJogadores.getChildren().get(i)).setText(jogadores[i].getPontos());
-        }
+        
+        ptoJog1.setText(jogadores[0].getPontos());
+        ptoJog2.setText(jogadores[1].getPontos());
+        ptoJog3.setText(jogadores[2].getPontos());
     }
 
     /**
@@ -219,7 +233,9 @@ public class PainelJogoController {
         ((TitledPane) this.paneJogadores.getChildren().get(posicaoJogadorAtual)).setEffect(deselected);
         posicaoJogadorAtual = (posicaoJogadorAtual + 1 < quantidadeJogadores) ? posicaoJogadorAtual + 1 : 0;
         ((TitledPane) this.paneJogadores.getChildren().get(posicaoJogadorAtual)).setEffect(selected);
+        jogadorAtual = jogadores[posicaoJogadorAtual];
         habilitarNovaJogada();
+
         for (int i = 0; i < quantidadeJogadores; i++) {
             System.out.println(jogadores[i].getNome() + " -> " + jogadores[i].getPontos());
         }
