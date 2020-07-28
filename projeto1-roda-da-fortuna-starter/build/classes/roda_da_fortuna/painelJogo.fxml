@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -190,5 +191,10 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
+        <TextField fx:id="txtPalpite" alignment="CENTER" layoutX="14.0" layoutY="533.0" prefHeight="37.0" prefWidth="1002.0" style="-fx-border-color: red; -fx-border-width: 2; -fx-border-radius: 5;">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </TextField>
     </children>
 </AnchorPane>

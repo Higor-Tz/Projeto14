@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="projeto1-roda-da-fortuna-starter.jar" size="13596" download="eager" />
+    <jar href="projeto1-roda-da-fortuna-starter.jar" size="14481" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="roda_da_fortuna.RodaDaFortunaStarter"  name="projeto1-roda-da-fortuna-starter" />
   <update check="always"/>

@@ -2,12 +2,16 @@ package roda_da_fortuna;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import modelo.Jogador;
 import modelo.Roda;
@@ -20,13 +24,7 @@ import modelo.Tabuleiro;
 public class PainelJogoController {
 
     @FXML
-    private Label ptoJog1;
-
-    @FXML
-    private Label ptoJog2;
-
-    @FXML
-    private Label ptoJog3;
+    private Label ptoJog1, ptoJog2, ptoJog3;
 
     @FXML
     private GridPane paneJogadores;
@@ -42,6 +40,9 @@ public class PainelJogoController {
 
     @FXML
     private GridPane paneVogais, paneConsoantes;
+
+    @FXML
+    private TextField txtPalpite;
 
     private final int quantidadeJogadores = 3;
     private final int custoVogal = 250;
@@ -63,6 +64,10 @@ public class PainelJogoController {
      */
     @FXML
     private void initialize() {
+        // bloquear txt de palpite
+        txtPalpite.setVisible(false);
+        txtPalpite.setOnKeyPressed(e -> checkPalpite(e));
+
         // bloquear comprarVogal
         this.comprarVogal.disableProperty().set(true);
 
@@ -81,7 +86,6 @@ public class PainelJogoController {
         this.paneConsoantes.disableProperty().set(true);
         // setar o evento clicarConsoante em cada botao das consoantes
         this.paneConsoantes.getChildren().forEach(n -> ((Button) n).setOnAction(e -> clicarConsoante(e, (Button) n)));
-
     }
 
     /**
@@ -109,6 +113,7 @@ public class PainelJogoController {
         this.imagemRoda.setImage(roda.getImagemAtual());
         if (roda.getValorAtual() == Roda.PROX || roda.getValorAtual() == Roda.RESET) {
             if (roda.getValorAtual() == Roda.RESET) {
+                alerta(AlertType.ERROR, "Roda da Fortuna", String.format("%s perdeu TUDO!", jogadorAtual.getNome()));
                 jogadorAtual.zerarPontos();
             }
             avancarProximoJogador();
@@ -119,14 +124,24 @@ public class PainelJogoController {
         }
     }
 
+    @FXML
+    private void resolverPuzzleAction(ActionEvent event) {
+        txtPalpite.setVisible(true);
+    }
+
     /**
      * Implementa a logica de tentar adivinhar o puzzle.
      *
      * @param event
      */
     @FXML
-    private void resolverPuzzleAction(ActionEvent event) {
-
+    private void checkPalpite(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            isFimDoJogo();
+            txtPalpite.setVisible(false);
+            txtPalpite.setText("");
+            avancarProximoJogador();
+        }
     }
 
     /**
@@ -177,7 +192,12 @@ public class PainelJogoController {
      * ganhou e termina a aplicacao.
      */
     private void isFimDoJogo() {
-        //if(tabuleiro)
+        if (txtPalpite.getText().equalsIgnoreCase(tabuleiro.getPuzzle())) {
+            alerta(AlertType.CONFIRMATION, "Roda da Fortuna", String.format("Resposta Correta\n%s VENCEU e levou %sR$", jogadorAtual.getNome(), jogadorAtual.getPontos()));
+            System.exit(0);
+        } else {
+            alerta(AlertType.ERROR, "Roda da Fortuna", String.format("Resposta Errada"));
+        }
     }
 
     /**
@@ -208,18 +228,23 @@ public class PainelJogoController {
      * @param conteudo
      */
     private void alerta(AlertType type, String titulo, String conteudo) {
-
+        Alert mensagem = new Alert(type);
+        mensagem.setTitle(titulo);
+        mensagem.setHeaderText(null);
+        mensagem.setContentText(conteudo);
+        mensagem.showAndWait();
     }
 
     public void habilitarNovaJogada() {
         this.paneConsoantes.disableProperty().set(true);
         this.paneVogais.disableProperty().set(true);
-        
-        boolean mostraVogal = (isVogaisEsgotadas() && (Integer.parseInt(jogadorAtual.getPontos()) >= custoVogal));
+
+        boolean mostraVogal = !(!isVogaisEsgotadas() && (Integer.parseInt(jogadorAtual.getPontos()) >= custoVogal));
         this.comprarVogal.disableProperty().set(mostraVogal);
         this.girarRoda.disableProperty().set(isConsoantesEsgotadas());
         this.resolverPuzzle.disableProperty().set(false);
-        
+
+        // Ajusta os ptos na tela
         ptoJog1.setText(jogadores[0].getPontos());
         ptoJog2.setText(jogadores[1].getPontos());
         ptoJog3.setText(jogadores[2].getPontos());
@@ -230,12 +255,14 @@ public class PainelJogoController {
      * <code>selected</code>, no <code>TitledPane</code> do jogador atual.
      */
     private void avancarProximoJogador() {
+        alerta(AlertType.WARNING, "Roda da Fortuna", String.format("%s perdeu a vez!", jogadorAtual.getNome()));
         ((TitledPane) this.paneJogadores.getChildren().get(posicaoJogadorAtual)).setEffect(deselected);
         posicaoJogadorAtual = (posicaoJogadorAtual + 1 < quantidadeJogadores) ? posicaoJogadorAtual + 1 : 0;
         ((TitledPane) this.paneJogadores.getChildren().get(posicaoJogadorAtual)).setEffect(selected);
         jogadorAtual = jogadores[posicaoJogadorAtual];
         habilitarNovaJogada();
 
+        // for debug
         for (int i = 0; i < quantidadeJogadores; i++) {
             System.out.println(jogadores[i].getNome() + " -> " + jogadores[i].getPontos());
         }
