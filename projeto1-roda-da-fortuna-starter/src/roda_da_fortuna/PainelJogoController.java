@@ -239,7 +239,7 @@ public class PainelJogoController {
         this.paneConsoantes.disableProperty().set(true);
         this.paneVogais.disableProperty().set(true);
 
-        boolean mostraVogal = !(!isVogaisEsgotadas() && (Integer.parseInt(jogadorAtual.getPontos()) >= custoVogal));
+        boolean mostraVogal = (isVogaisEsgotadas() || !(Integer.parseInt(jogadorAtual.getPontos()) >= custoVogal));
         this.comprarVogal.disableProperty().set(mostraVogal);
         this.girarRoda.disableProperty().set(isConsoantesEsgotadas());
         this.resolverPuzzle.disableProperty().set(false);
