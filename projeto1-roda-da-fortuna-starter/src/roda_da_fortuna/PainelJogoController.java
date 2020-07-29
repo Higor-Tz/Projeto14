@@ -48,8 +48,7 @@ public class PainelJogoController {
     private final int custoVogal = 250;
     private int posicaoJogadorAtual = 0;
 
-    private int countVogais = 0;
-    private int countConsoantes = 0;
+    private int countVogais = 0, countConsoantes = 0;
 
     private Tabuleiro tabuleiro;
     private Roda roda;
@@ -74,8 +73,7 @@ public class PainelJogoController {
         // instanciar a Roda
         this.roda = new Roda();
         // setar a imagem atual da Roda
-        imagemRoda.setImage(this.roda.getImagemAtual()); // remover comentario, 
-        // apos implementar a classe Roda
+        imagemRoda.setImage(this.roda.getImagemAtual()); 
 
         // bloquear o painel das vogais
         this.paneVogais.disableProperty().set(true);
@@ -127,6 +125,7 @@ public class PainelJogoController {
     @FXML
     private void resolverPuzzleAction(ActionEvent event) {
         txtPalpite.setVisible(true);
+        txtPalpite.requestFocus();
     }
 
     /**
