@@ -8,8 +8,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- *
- * @author braulio
+ * // interface grafica do braulio
+ * @author higor
  */
 public class RodaDaFortunaStarter extends Application {
 
@@ -22,7 +22,7 @@ public class RodaDaFortunaStarter extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Erro:" + e.getMessage());
         }
     }
 

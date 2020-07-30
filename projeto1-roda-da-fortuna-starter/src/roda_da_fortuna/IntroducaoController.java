@@ -11,8 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- *
- * @author braulio
+ * // interface grafica do braulio
+ * @author higor
  */
 public class IntroducaoController {
 

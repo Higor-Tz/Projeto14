@@ -1,8 +1,8 @@
 package modelo;
 
 /**
- *
- * @author braulio
+ * // interface grafica do braulio
+ * @author higor
  */
 public class Jogador {
 
@@ -25,7 +25,8 @@ public class Jogador {
 
     /**
      * Reduz os pontos en <code>aReduzir</code>
-     * @param aReduzir 
+     *
+     * @param aReduzir
      */
     public void reduzirPontos(int aReduzir) {
         this.pontos -= aReduzir;
@@ -33,7 +34,8 @@ public class Jogador {
 
     /**
      * Aumenta os pontos en <code>aAumentar</code>
-     * @param aAumentar 
+     *
+     * @param aAumentar
      */
     public void aumentarPontos(int aAumentar) {
         this.pontos += aAumentar;
@@ -64,6 +66,7 @@ public class Jogador {
 
     /**
      * Retorna os pontos do jogador como uma String
+     *
      * @return String
      */
     public String getPontos() {
